@@ -1,0 +1,40 @@
+{
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "2015"
+  },
+  "extends": ["eslint:recommended"],
+  "rules": {
+    "no-extra-semi": "off",
+    "no-unexpected-multiline": "off",
+    "no-control-regex": "off",
+    "no-empty": "off",
+    "no-useless-escape": "off"
+  },
+  "overrides": [
+    {
+      "files": "lib/**/*.js",
+      "env": {
+        "browser": true
+      },
+      "extends": ["plugin:es5/no-es2015", "plugin:es5/no-es2016"],
+      "rules": {
+        "es5/no-modules": "off"
+      }
+    },
+    {
+      "files": ["benchmark/**/*.js", "support/**/*.js", "bin/**/*.js", "lib/cli.js"],
+      "env": {
+        "browser": false,
+        "node": true
+      }
+    },
+    {
+      "files": "test/**/*.js",
+      "env": {
+        "node": true,
+        "mocha": true
+      }
+    }
+  ]
+}

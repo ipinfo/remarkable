@@ -1,0 +1,90 @@
+{
+  "name": "remarkable",
+  "description": "Markdown parser, done right. 100% Commonmark support, extensions, syntax plugins, high speed - all in one.",
+  "version": "2.0.1",
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/remarkable/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "bin",
+    "linkify",
+    "dist",
+    "index.js"
+  ],
+  "bin": "./bin/remarkable.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "browser": {
+    "./dist/cjs/index.js": "./dist/cjs/index.browser.js",
+    "./dist/esm/index.js": "./dist/esm/index.browser.js"
+  },
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "scripts": {
+    "build": "rm -rf dist && yarn rollup -c",
+    "lint": "eslint .",
+    "test:browser": "yarn build && node -r esm ./test/test-browser.js && serve .",
+    "test:spec": "./support/specsplit.js test/fixtures/commonmark/spec.txt",
+    "test:mocha": "mocha -r esm -R spec",
+    "test:ci": "nyc mocha -r esm -R spec --bail",
+    "test": "yarn test:mocha && yarn test:spec",
+    "coverage": "yarn add coveralls@2 && nyc report --reporter=text-lcov | coveralls",
+    "prepublishOnly": "yarn build",
+    "prepare": "yarn build",
+    "prepublish": "yarn build"
+  },
+  "nyc": {
+    "exclude": [
+      "dist"
+    ]
+  },
+  "dependencies": {
+    "argparse": "^1.0.10",
+    "autolinker": "^3.11.0"
+  },
+  "devDependencies": {
+    "ansi": "^0.3.0",
+    "benchmark": "^1.0.0",
+    "commonmark": "0.12.0",
+    "eslint": "^6.1.0",
+    "eslint-plugin-es5": "^1.4.1",
+    "esm": "^3.2.25",
+    "gulp-format-md": "^0.1.10",
+    "highlight.js": "10.7.3",
+    "marked": "0.3.2",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "rollup": "^1.16.7",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.1.1",
+    "serve": "^11.1.0"
+  },
+  "keywords": [
+    "commonmark",
+    "markdown",
+    "md",
+    "parse",
+    "parser",
+    "process",
+    "remarkable",
+    "render",
+    "renderer",
+    "text"
+  ],
+  "verb": {
+    "toc": false,
+    "layout": "nil",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "lint": {
+      "reflinks": true
+    }
+  }
+}
