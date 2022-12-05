@@ -31,7 +31,7 @@
     "test:ci": "nyc mocha -r esm -R spec --bail",
     "test": "yarn test:mocha && yarn test:spec",
     "coverage": "yarn add coveralls@2 && nyc report --reporter=text-lcov | coveralls",
-    "prepare": "yarn build",
+    "postinstall": "yarn build",
     "prepublishOnly": "yarn build"
   },
   "nyc": {
